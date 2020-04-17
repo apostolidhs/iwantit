@@ -10,18 +10,16 @@ const Container = styled(Box)`
   z-index: 10;
 `;
 
-const Notification = ({type, message}) => {
-  return (
-    <Container animation="fadeIn">
-      <Box
-        background={type === 'info' ? 'neutral-3' : 'status-warning'}
-        pad={{left: 'medium', vertical: 'small', right: 'medium'}}>
-        <Text color="white" size="large">
-          {message}
-        </Text>
-      </Box>
-    </Container>
-  );
-};
+const Notification = ({type, message}) => (
+  <Container animation="fadeIn">
+    <Box
+      background={type === 'info' ? 'neutral-3' : 'status-warning'}
+      pad={{left: 'medium', vertical: 'small', right: 'medium'}}>
+      <Text color="white" size="large">
+        {message}
+      </Text>
+    </Box>
+  </Container>
+);
 
 export default Notification;
