@@ -1,4 +1,5 @@
 import React from 'react';
+import identity from 'lodash/identity';
 import useContextSelector from 'hooks/useContextSelector';
 import Context from './context';
 
@@ -9,9 +10,7 @@ const configuration = {
 
 const Configuration = ({children}) => <Context.Provider value={configuration}>{children}</Context.Provider>;
 
-export const useConfiguration = select => {
-  return useContextSelector(Context, select);
-};
+export const useConfiguration = (select = identity) => useContextSelector(Context, select);
 
 const apiUrlSelector = ({apiUrl}) => apiUrl;
 export const useApiUrl = () => useConfiguration(apiUrlSelector);
