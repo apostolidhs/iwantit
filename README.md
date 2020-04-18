@@ -1,4 +1,4 @@
-![.github/workflows/continuous-integration.yml](https://github.com/apostolidhs/iwantit/workflows/.github/workflows/continuous-integration.yml/badge.svg) ![.github/workflows/continuous-deployment.yml](https://github.com/apostolidhs/iwantit/workflows/.github/workflows/continuous-deployment.yml/badge.svg)
+![Continuous Integration](https://github.com/apostolidhs/iwantit/workflows/Continuous%20Integration/badge.svg) ![Continuous Deployment](https://github.com/apostolidhs/iwantit/workflows/Continuous%20Deployment/badge.svg?branch=production)
 
 # iwantit
 
