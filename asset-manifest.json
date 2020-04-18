@@ -1,19 +1,27 @@
 {
   "files": {
-    "main.js": "/iwantit/static/js/main.cd8a9c5d.chunk.js",
-    "main.js.map": "/iwantit/static/js/main.cd8a9c5d.chunk.js.map",
-    "runtime-main.js": "/iwantit/static/js/runtime-main.9035b19e.js",
-    "runtime-main.js.map": "/iwantit/static/js/runtime-main.9035b19e.js.map",
-    "static/js/2.593001b4.chunk.js": "/iwantit/static/js/2.593001b4.chunk.js",
-    "static/js/2.593001b4.chunk.js.map": "/iwantit/static/js/2.593001b4.chunk.js.map",
+    "main.js": "/iwantit/static/js/main.7bca773d.chunk.js",
+    "main.js.map": "/iwantit/static/js/main.7bca773d.chunk.js.map",
+    "page.categories.js": "/iwantit/static/js/page.categories.63f016ff.chunk.js",
+    "page.categories.js.map": "/iwantit/static/js/page.categories.63f016ff.chunk.js.map",
+    "page.notfound.js": "/iwantit/static/js/page.notfound.e5fdc97c.chunk.js",
+    "page.notfound.js.map": "/iwantit/static/js/page.notfound.e5fdc97c.chunk.js.map",
+    "page.product.js": "/iwantit/static/js/page.product.d3bdef8b.chunk.js",
+    "page.product.js.map": "/iwantit/static/js/page.product.d3bdef8b.chunk.js.map",
+    "page.products.js": "/iwantit/static/js/page.products.3c0b414a.chunk.js",
+    "page.products.js.map": "/iwantit/static/js/page.products.3c0b414a.chunk.js.map",
+    "runtime-main.js": "/iwantit/static/js/runtime-main.0f3273aa.js",
+    "runtime-main.js.map": "/iwantit/static/js/runtime-main.0f3273aa.js.map",
+    "static/js/6.0ec2cace.chunk.js": "/iwantit/static/js/6.0ec2cace.chunk.js",
+    "static/js/6.0ec2cace.chunk.js.map": "/iwantit/static/js/6.0ec2cace.chunk.js.map",
     "index.html": "/iwantit/index.html",
-    "precache-manifest.fb2ee3b7e662929c7e8b2fc231b3bce4.js": "/iwantit/precache-manifest.fb2ee3b7e662929c7e8b2fc231b3bce4.js",
+    "precache-manifest.f7cf1cdfc8598b8aef9d0c7bdcdcfddc.js": "/iwantit/precache-manifest.f7cf1cdfc8598b8aef9d0c7bdcdcfddc.js",
     "service-worker.js": "/iwantit/service-worker.js",
-    "static/js/2.593001b4.chunk.js.LICENSE.txt": "/iwantit/static/js/2.593001b4.chunk.js.LICENSE.txt"
+    "static/js/6.0ec2cace.chunk.js.LICENSE.txt": "/iwantit/static/js/6.0ec2cace.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.9035b19e.js",
-    "static/js/2.593001b4.chunk.js",
-    "static/js/main.cd8a9c5d.chunk.js"
+    "static/js/runtime-main.0f3273aa.js",
+    "static/js/6.0ec2cace.chunk.js",
+    "static/js/main.7bca773d.chunk.js"
   ]
 }
