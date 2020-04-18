@@ -1,8 +1,10 @@
 import React from 'react';
 import ConfigurationProvider from 'providers/configuration';
 import ThemeProvider from 'providers/theme';
-import NotificationsProvider from 'providers/notifications';
 import LocalizationProvider from 'providers/localization';
+import NotificationsProvider from 'providers/notifications';
+import ApiProvider from 'providers/api';
+import CategoriesProvider from 'providers/categories';
 import Pages from './pages';
 
 const App = () => (
@@ -10,7 +12,11 @@ const App = () => (
     <ThemeProvider>
       <LocalizationProvider>
         <NotificationsProvider>
-          <Pages />
+          <ApiProvider>
+            <CategoriesProvider>
+              <Pages />
+            </CategoriesProvider>
+          </ApiProvider>
         </NotificationsProvider>
       </LocalizationProvider>
     </ThemeProvider>
