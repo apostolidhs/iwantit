@@ -15,9 +15,6 @@ const GlobalStyle = createGlobalStyle`
     text-decoration-color: initial;
     color: initial;
   }
-  a:-webkit-any-link {
-    color: initial;
-  }
   button:focus {
     outline:0 !important;
   }

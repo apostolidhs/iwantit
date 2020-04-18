@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useMemo} from 'react';
 import {Grommet, ResponsiveContext} from 'grommet';
 import theme from './theme';
 import GlobalStyle from './globalStyle';
@@ -10,8 +10,10 @@ const Theme = ({children}) => (
   </Grommet>
 );
 
+export const useSize = () => useContext(ResponsiveContext);
+
 export const useScreenSize = () => {
-  const size = useContext(ResponsiveContext);
+  const size = useSize();
 
   return useMemo(
     () => ({
