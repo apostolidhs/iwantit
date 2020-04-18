@@ -6,7 +6,7 @@ const getParams = params =>
     .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(params[k]))
     .join('&');
 
-const request = (href, {params, transform = identity, method = 'GET', headers, ...options} = {}) => {
+export default (href, {params, transform = identity, method = 'GET', headers, ...options} = {}) => {
   const controller = new AbortController();
 
   const search = params && getParams(params);
@@ -42,15 +42,3 @@ const request = (href, {params, transform = identity, method = 'GET', headers, .
 
   return request;
 };
-
-const get = request;
-
-const put = (href, {body, ...options}) =>
-  request(href, {method: 'PUT', ...(body && {body: JSON.stringify(body)}), ...options});
-
-const post = (href, {body, ...options}) =>
-  request(href, {method: 'POST', ...(body && {body: JSON.stringify(body)}), ...options});
-
-const del = (href, options) => request(href, {method: 'DELETE', ...options});
-
-export default {get, post, put, del};
