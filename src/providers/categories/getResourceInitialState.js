@@ -1,9 +1,12 @@
 import getResourceInitialState from 'providers/utilities/getResourceInitialState';
 
-export default () => ({
-  ...getResourceInitialState(),
+export default id => ({
+  ...getResourceInitialState(id),
   title: '',
   slug: '',
-  position: -1,
-  image_url: ''
+  position: 0,
+  imageUrl: '',
+  productsCount: 0,
+  priceMin: '',
+  priceMax: ''
 });
