@@ -37,7 +37,6 @@ const Configuration = ({children}) => {
 };
 
 export const useCategoriesSelector = select => useContextSelector(Context, select);
-export const useCategorySelector = (id, select = identity) =>
-  useCategoriesSelector(Context, ({byId}) => select(byId[id]));
+export const useCategorySelector = (id, select = identity) => useCategoriesSelector(({byId}) => select(byId[id]));
 
 export default Configuration;
