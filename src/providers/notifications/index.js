@@ -1,4 +1,5 @@
-import React, {Fragment, useState, useMemo, useContext} from 'react';
+import React, {Fragment, useState, useMemo} from 'react';
+import useContextSelector from 'hooks/useContextSelector';
 import {useIntl} from 'providers/localization';
 import getDispatch from './getDispatch';
 import Context from './context';
@@ -18,6 +19,6 @@ const Notifications = ({children}) => {
   );
 };
 
-export const useNotification = () => useContext(Context);
+export const useNotification = () => useContextSelector(Context);
 
 export default Notifications;
