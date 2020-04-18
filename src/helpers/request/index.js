@@ -1,4 +1,5 @@
 import identity from 'lodash/identity';
+import toCamelCase from './toCamelCase';
 
 const getParams = params =>
   Object.keys(params)
@@ -32,7 +33,7 @@ export default (href, {params, transform = identity, method = 'GET', headers, ..
     )
     .then(({data, response}) => {
       const {status, statusText} = response;
-      if (response.ok) return {data: transform(data), status, statusText};
+      if (response.ok) return {data: transform(toCamelCase(data)), status, statusText};
       throw {data, status, statusText};
     });
 

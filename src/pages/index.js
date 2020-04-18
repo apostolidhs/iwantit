@@ -1,5 +1,8 @@
 import React, {Suspense, lazy} from 'react';
 import {Router} from '@reach/router';
+import {Main, Box} from 'grommet';
+import Header from 'organisms/header';
+import Footer from 'organisms/footer';
 import {useConfiguration} from 'providers/configuration';
 
 const Categories = lazy(() => import(/* webpackChunkName: 'page.categories' */ './categories'));
@@ -11,15 +14,21 @@ const Page = () => {
   const {basepath} = useConfiguration();
 
   return (
-    <Suspense fallback={null}>
-      <Router basepath={basepath} data-testid="router">
-        <Categories path="/" />
-        <Products path="/category/:categoryId" />
-        <Product path="/product/:id" />
+    <Box height="100%">
+      <Header />
+      <Box as="main" background="light-1" flex="grow">
+        <Suspense fallback={null}>
+          <Router component={Box} align="center" pad="large" basepath={basepath} data-testid="router">
+            <Categories path="/" />
+            <Products path="/category/:categoryId" />
+            <Product path="/product/:id" />
 
-        <NotFound default />
-      </Router>
-    </Suspense>
+            <NotFound default />
+          </Router>
+        </Suspense>
+      </Box>
+      <Footer />
+    </Box>
   );
 };
 

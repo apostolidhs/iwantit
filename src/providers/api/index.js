@@ -1,12 +1,13 @@
 import React, {useMemo} from 'react';
 import useContextSelector from 'hooks/useContextSelector';
-import {useApiUrl} from 'providers/configuration';
+import {useConfiguration} from 'providers/configuration';
 import getDispatch from './getDispatch';
+import getMockDispatch from './getMockDispatch';
 import Context from './context';
 
 const Api = ({children}) => {
-  const apiUrl = useApiUrl();
-  const dispatch = useMemo(() => getDispatch(apiUrl), []);
+  const {apiUrl, mockApi} = useConfiguration();
+  const dispatch = useMemo(() => (mockApi ? getMockDispatch() : getDispatch(apiUrl)), []);
 
   return <Context.Provider value={dispatch}>{children}</Context.Provider>;
 };
