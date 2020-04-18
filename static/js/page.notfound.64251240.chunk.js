@@ -1,0 +1,2 @@
+(this.webpackJsonpiwantit=this.webpackJsonpiwantit||[]).push([[2],{97:function(t,n,e){"use strict";e.r(n);var i=e(0),a=e.n(i);n.default=function(){return a.a.createElement("h1",null,"NotFound")}}}]);
+//# sourceMappingURL=page.notfound.64251240.chunk.js.map
