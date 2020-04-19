@@ -16,8 +16,8 @@ const updateParams = dispatch => {
 const useParams = (enabled, {priceMin, priceMax}) =>
   useMemo(() => {
     const {priceMin: priceMinValue, priceMax: priceMaxValue, sort, order, page} = queryString.parse(location.search);
-    const priceMinRange = getNumber(priceMinValue, priceMin);
-    const priceMaxRange = getNumber(priceMaxValue, priceMax);
+    const priceMinRange = getNumber(priceMinValue, NaN);
+    const priceMaxRange = getNumber(priceMaxValue, NaN);
     const priceRange = priceMinRange > priceMaxRange ? [0, 0] : [priceMinRange, priceMaxRange];
 
     return {

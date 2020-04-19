@@ -3,6 +3,8 @@ import {Box, Stack, RangeSelector, TextInput, Text} from 'grommet';
 import styled from 'styled-components';
 
 const NumericContainer = styled(Box)`
+  margin-top: ${({theme}) => theme.global.edgeSize.small};
+
   > * {
     width: 100px;
 
@@ -18,7 +20,7 @@ const Range = ({id, values, min, max, onChange, label, ...rest}) => (
     <Text as="label" htmlFor={id}>
       {label}
     </Text>
-    <Box gap="small" flex="grow">
+    <Box flex="grow">
       <Stack>
         <Box border={{color: 'light-3'}} />
         <RangeSelector id={id} values={values} onChange={onChange} min={min} max={max} round="xsmall" size="xxsmall" />
