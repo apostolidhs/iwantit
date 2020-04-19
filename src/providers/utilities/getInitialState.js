@@ -1,6 +1,6 @@
 export default () => ({
   loaded: false,
-  loading: true,
+  loading: false,
   ids: [],
   byId: {}
 });
