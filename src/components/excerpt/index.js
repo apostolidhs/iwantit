@@ -1,20 +1,20 @@
 import React, {memo} from 'react';
 import {Text} from 'grommet';
 
-const getText = excerpt => {
+const getText = (excerpt, short) => {
   const div = document.createElement('div');
   div.innerHTML = excerpt;
 
-  return div.textContent
+  const items = div.textContent
     .split(',')
     .map(v => v.trim())
-    .filter(Boolean)
-    .splice(1)
-    .join(', ');
+    .filter(Boolean);
+
+  return (short ? items.splice(1, 6) : items.splice(1)).join(', ');
 };
 
-const Excerpt = ({children}) => {
-  const text = children && getText(children);
+const Excerpt = ({children, short}) => {
+  const text = children && getText(children, short);
   return text ? <Text size="small">{text}</Text> : null;
 };
 
