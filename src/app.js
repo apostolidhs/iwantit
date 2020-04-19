@@ -5,6 +5,8 @@ import LocalizationProvider from 'providers/localization';
 import NotificationsProvider from 'providers/notifications';
 import ApiProvider from 'providers/api';
 import CategoriesProvider from 'providers/categories';
+import ProductsProvider from 'providers/products';
+import ProductBuckets from 'providers/productBuckets';
 import Pages from './pages';
 
 const App = () => (
@@ -14,7 +16,11 @@ const App = () => (
         <NotificationsProvider>
           <ApiProvider>
             <CategoriesProvider>
-              <Pages />
+              <ProductsProvider>
+                <ProductBuckets>
+                  <Pages />
+                </ProductBuckets>
+              </ProductsProvider>
             </CategoriesProvider>
           </ApiProvider>
         </NotificationsProvider>

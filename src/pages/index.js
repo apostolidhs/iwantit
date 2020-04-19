@@ -20,7 +20,7 @@ const Page = () => {
         <Suspense fallback={null}>
           <Router component={Box} align="center" pad="large" basepath={basepath} data-testid="router">
             <Categories path="/" />
-            <Products path="/category/:categoryId" />
+            <Products path="/category/:categoryId/*" />
             <Product path="/product/:id" />
 
             <NotFound default />

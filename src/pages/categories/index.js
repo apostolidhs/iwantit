@@ -6,7 +6,7 @@ import {useCategoriesSelector} from 'providers/categories';
 import Category from 'organisms/category';
 import Skeleton from 'organisms/category/skeleton';
 
-const LoadingCards = [...Array(8)];
+const loadingCards = [...Array(8)];
 
 const LayoutSpread = css`
   ${({isSmall}) =>
@@ -35,7 +35,7 @@ const SkeletonCard = styled(Skeleton)`
 const CardContainer = styled(Grid)`
   grid-auto-rows: 240px;
   width: 100%;
-  max-width: ${({theme, isSmall}) => (isSmall ? '100%' : theme.global.size['xxlarge'])};
+  max-width: ${({theme, isSmall}) => (isSmall ? '100%' : theme.global.size.xxlarge)};
 `;
 
 const Categories = () => {
@@ -59,7 +59,8 @@ const Categories = () => {
         {ids.map(id => (
           <Card key={id} id={id} isSmall={isSmall} />
         ))}
-        {loading && LoadingCards.map((v, index) => <SkeletonCard key={index} isSmall={isSmall} />)}
+        {loaded && ids.length === 0 && 'No results'}
+        {loading && loadingCards.map((v, index) => <SkeletonCard key={index} isSmall={isSmall} />)}
       </CardContainer>
     </Box>
   );
