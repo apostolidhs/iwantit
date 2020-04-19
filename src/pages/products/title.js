@@ -1,6 +1,6 @@
 import React from 'react';
 import {Box, Text, Heading} from 'grommet';
-import {useCategorySelector, useCategoryDispatch} from 'providers/categories';
+import {useCategorySelector} from 'providers/categories';
 
 const selector = ({title, productsCount}) => ({title, productsCount});
 

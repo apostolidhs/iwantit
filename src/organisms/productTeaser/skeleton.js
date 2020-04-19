@@ -1,6 +1,5 @@
 import React from 'react';
 import {Box} from 'grommet';
-import Link from 'components/link';
 import SkeletonComponent from 'components/skeleton';
 
 const Skeleton = props => (

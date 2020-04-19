@@ -18,6 +18,7 @@ import Breadcrumb from './breadcrumb';
 import Title from './title';
 import ActiveFilter from './activeFilter';
 import FilterButton from './filterButton';
+import NoResults from './noResults';
 
 const loadingCards = [...Array(15)];
 
@@ -46,8 +47,7 @@ const Products = ({categoryId}) => {
   });
 
   useEffect(() => {
-    if (categoryLoaded) return;
-    categoryDispatch(categoryActions.fetchCategory(categoryId));
+    if (!categoryLoaded) categoryDispatch(categoryActions.fetchCategory(categoryId));
   }, []);
 
   const bucketParams = {categoryId, page, sort, order, priceMin: priceRange[0], priceMax: priceRange[1]};
@@ -55,9 +55,7 @@ const Products = ({categoryId}) => {
   const bucketsDispatch = useBucketsDispatch();
 
   useEffect(() => {
-    if (loading || bucketLoaded) return;
-
-    bucketsDispatch(bucketActions.fetchBucket(categoryId, bucketParams));
+    if (!loading && !bucketLoaded) bucketsDispatch(bucketActions.fetchBucket(categoryId, bucketParams));
   }, [loading, bucketLoaded]);
 
   const priceProps = {
@@ -68,7 +66,9 @@ const Products = ({categoryId}) => {
     label: 'Τιμή',
     id: 'priceFilter'
   };
+
   const hasFilter = priceProps.values[0] > priceMin || priceProps.values[1] < priceMax;
+  const hasResults = ids.length > 0;
 
   return (
     <Container isSmall={isSmall} gap="medium">
@@ -91,10 +91,10 @@ const Products = ({categoryId}) => {
           {!isSmall && hasFilter && <ActiveFilter {...priceProps} />}
         </Box>
         {isSmall && <FilterButton enabled={hasFilter} onClick={filtersOn} />}
-        {!isSmall && <Pagination total={productsCount} page={page} onPage={onPage} />}
+        {!isSmall && hasResults && <Pagination total={productsCount} page={page} onPage={onPage} />}
       </Box>
 
-      {isSmall && page > 1 && (
+      {isSmall && hasResults && page > 1 && (
         <Box direction="row" justify="center" margin={{top: 'small'}}>
           <Pagination total={productsCount} page={page} onPage={onPage} up />
         </Box>
@@ -111,14 +111,17 @@ const Products = ({categoryId}) => {
           {ids.map(id => (
             <ProductTeaser key={id} id={id} />
           ))}
-          {bucketLoaded && ids.length === 0 && 'No results'}
           {loading && loadingCards.map((v, index) => <Skeleton key={index} isSmall={isSmall} />)}
         </CardContainer>
       </Box>
 
-      <Box direction="row" justify="center" margin={{top: 'small'}}>
-        <Pagination total={productsCount} page={page} onPage={onPage} />
-      </Box>
+      {bucketLoaded && ids.length === 0 && <NoResults id={categoryId} />}
+
+      {hasResults && (
+        <Box direction="row" justify="center" margin={{top: 'small'}}>
+          <Pagination total={productsCount} page={page} onPage={onPage} />
+        </Box>
+      )}
 
       {isSmall && showFilters && <FilterOverlay onClose={filtersOff} {...priceProps} />}
     </Container>
