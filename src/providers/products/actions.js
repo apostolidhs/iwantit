@@ -7,7 +7,7 @@ export const fetchProduct = id => (state, dispatch, {api, notification}) => {
     .getProduct(id)
     .then(({data}) => dispatch(actions.doneFetchResource(id, data)))
     .catch(error => {
-      dispatch(actions.failFetchResource(id));
+      dispatch(actions.failFetchResource(id, error));
       notification.server(error);
     });
 };

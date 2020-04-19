@@ -25,7 +25,7 @@ export const fetchCategory = id => (state, dispatch, {api, notification}) => {
       dispatch(actions.doneFetchResource(id, data));
     })
     .catch(error => {
-      dispatch(actions.failFetchResource(id));
+      dispatch(actions.failFetchResource(id, error));
       notification.server(error);
     });
 };

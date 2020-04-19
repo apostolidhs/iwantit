@@ -17,8 +17,9 @@ export default (dispatch, {intl}) => {
   return {
     info,
     warning: make('warning'),
-    server: error => {
-      const message = intl(error.status === -1 ? 'error.connection' : 'error.general');
+    server: ({status}) => {
+      if (status === 404) return;
+      const message = intl(status === -1 ? 'error.connection' : 'error.general');
       info(message);
     }
   };

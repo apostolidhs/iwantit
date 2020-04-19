@@ -18,7 +18,7 @@ export const fetchBucket = (categoryId, {page, sort, order, priceMax, priceMin})
       dispatch(actions.doneFetchResource(bucketId, {ids}));
     })
     .catch(error => {
-      dispatch(actions.failFetchResource(bucketId));
+      dispatch(actions.failFetchResource(bucketId, error));
       notification.server(error);
     });
 };
