@@ -5,10 +5,11 @@ export default (reducer, initialState, extraArgument) => {
   const stateRef = useRef();
   stateRef.current = state;
 
-  const dispatch = useCallback(param => {
-    if (typeof param === 'function') return param(stateRef.current, reactDispatch, extraArgument);
-    return reactDispatch(param);
-  }, []);
+  const dispatch = useCallback(
+    param =>
+      typeof param === 'function' ? param(stateRef.current, reactDispatch, extraArgument) : reactDispatch(param),
+    []
+  );
 
   return [state, dispatch];
 };
