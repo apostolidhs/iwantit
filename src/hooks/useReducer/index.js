@@ -6,7 +6,7 @@ export default (reducer, initialState, extraArgument) => {
   stateRef.current = state;
 
   const dispatch = useCallback(param => {
-    if (typeof param === 'function') return reactDispatch(param(stateRef.current, reactDispatch, extraArgument));
+    if (typeof param === 'function') return param(stateRef.current, reactDispatch, extraArgument);
     return reactDispatch(param);
   }, []);
 

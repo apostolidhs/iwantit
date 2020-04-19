@@ -7,6 +7,6 @@ export default id => ({
   position: 0,
   imageUrl: '',
   productsCount: 0,
-  priceMin: '',
-  priceMax: ''
+  priceMin: 0,
+  priceMax: 0
 });

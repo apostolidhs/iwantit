@@ -21,7 +21,7 @@ const reducer = (state, action) => {
 
 const initialState = getInitialState();
 
-const Configuration = ({children}) => {
+const Categories = ({children}) => {
   const extraArgument = useExtraArgument();
   const [state, dispatch] = useReducer(reducer, initialState, extraArgument);
 
@@ -37,6 +37,10 @@ const Configuration = ({children}) => {
 };
 
 export const useCategoriesSelector = select => useContextSelector(Context, select);
-export const useCategorySelector = (id, select = identity) => useCategoriesSelector(({byId}) => select(byId[id]));
 
-export default Configuration;
+export const useCategorySelector = (id, select = identity) =>
+  useCategoriesSelector(({byId}) => select(byId[id] || getResourceInitialState(id)));
+
+export const useCategoryDispatch = () => useContextSelector(DispatchContext);
+
+export default Categories;

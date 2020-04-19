@@ -37,7 +37,8 @@ const ProductBucket = ({children}) => {
 
 export const useBucketsSelector = select => useContextSelector(Context, select);
 
-export const useBucketSelector = (id, select = identity) => useBucketsSelector(({byId}) => select(byId[id]));
+export const useBucketSelector = (id, select = identity) =>
+  useBucketsSelector(({byId}) => select(byId[id] || getResourceInitialState(id)));
 
 export const useBucketParamsSelector = (params, select) => useBucketSelector(getBucketId(params), select);
 
