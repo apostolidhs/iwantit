@@ -33,7 +33,8 @@ const Products = ({children}) => {
 
 export const useProductsSelector = select => useContextSelector(Context, select);
 
-export const useProductSelector = (id, select = identity) => useProductsSelector(Context, ({byId}) => select(byId[id]));
+export const useProductSelector = (id, select = identity) =>
+  useProductsSelector(({byId}) => select(byId[id] || getResourceInitialState(id)));
 
 export const useProductsDispatch = () => useContextSelector(DispatchContext);
 
