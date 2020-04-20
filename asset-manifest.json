@@ -2,8 +2,8 @@
   "files": {
     "static/js/0.97475784.chunk.js": "/iwantit/static/js/0.97475784.chunk.js",
     "static/js/0.97475784.chunk.js.map": "/iwantit/static/js/0.97475784.chunk.js.map",
-    "main.js": "/iwantit/static/js/main.4f57808d.chunk.js",
-    "main.js.map": "/iwantit/static/js/main.4f57808d.chunk.js.map",
+    "main.js": "/iwantit/static/js/main.bf527e6c.chunk.js",
+    "main.js.map": "/iwantit/static/js/main.bf527e6c.chunk.js.map",
     "page.categories.js": "/iwantit/static/js/page.categories.bc6801db.chunk.js",
     "page.categories.js.map": "/iwantit/static/js/page.categories.bc6801db.chunk.js.map",
     "page.notfound.js": "/iwantit/static/js/page.notfound.d31506ca.chunk.js",
@@ -27,13 +27,13 @@
     "static/js/12.2f82c13f.chunk.js": "/iwantit/static/js/12.2f82c13f.chunk.js",
     "static/js/12.2f82c13f.chunk.js.map": "/iwantit/static/js/12.2f82c13f.chunk.js.map",
     "index.html": "/iwantit/index.html",
-    "precache-manifest.39e6f132133ffd3eb8aebd46ecf62e46.js": "/iwantit/precache-manifest.39e6f132133ffd3eb8aebd46ecf62e46.js",
+    "precache-manifest.aee6fda57f729ec596003268b253cab8.js": "/iwantit/precache-manifest.aee6fda57f729ec596003268b253cab8.js",
     "service-worker.js": "/iwantit/service-worker.js",
     "static/js/7.1530a246.chunk.js.LICENSE.txt": "/iwantit/static/js/7.1530a246.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.3470d8f9.js",
     "static/js/7.1530a246.chunk.js",
-    "static/js/main.4f57808d.chunk.js"
+    "static/js/main.bf527e6c.chunk.js"
   ]
 }
