@@ -1,4 +1,5 @@
 import React from 'react';
+import {FormattedMessage} from 'react-intl';
 import {Box, Text, Heading} from 'grommet';
 import {useCategorySelector} from 'providers/categories';
 
@@ -13,7 +14,7 @@ const Title = ({id, ...rest}) => {
         {title}
       </Heading>
       <Text color="dark-3" size="small">
-        {productsCount} προϊόντα
+        <FormattedMessage id="pages.products.quantity" values={{productsCount}} />
       </Text>
     </Box>
   );

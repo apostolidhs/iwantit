@@ -1,7 +1,7 @@
 import * as actions from 'providers/utilities/actions';
 import {getBucketId} from './helpers';
 
-export const fetchBucket = (categoryId, {page, sort, order, priceMax, priceMin}) => (
+export const fetchBucket = ({categoryId, page, sort, order, priceMax, priceMin}) => (
   state,
   dispatch,
   {api, notification, productsDispatch}

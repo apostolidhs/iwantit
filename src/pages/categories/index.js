@@ -1,4 +1,5 @@
 import React, {useMemo} from 'react';
+import {FormattedMessage} from 'react-intl';
 import {Grid, Box} from 'grommet';
 import styled, {css} from 'styled-components';
 import {useScreenSize} from 'providers/theme';
@@ -63,7 +64,7 @@ const Categories = () => {
         {validIds.map(id => (
           <Card key={id} id={id} isSmall={isSmall} />
         ))}
-        {loaded && validIds.length === 0 && 'No results'}
+        {loaded && validIds.length === 0 && <FormattedMessage id="pages.categories.noResults" />}
         {loading && loadingCards.map((v, index) => <SkeletonCard key={index} isSmall={isSmall} />)}
       </CardContainer>
     </Box>

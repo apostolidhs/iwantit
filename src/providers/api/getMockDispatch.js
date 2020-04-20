@@ -1,6 +1,11 @@
 import toCamelCase from 'helpers/request/toCamelCase';
 
-const makeResponse = response => new Promise(r => setTimeout(() => r({data: toCamelCase(response.default)}), 1));
+const makeResponse = response => {
+  console.log('request');
+  return new Promise(r => {
+    setTimeout(() => r({data: toCamelCase(response.default)}), 1);
+  });
+};
 
 export default () => ({
   getCategories: () => import('fixtures/categories').then(makeResponse),

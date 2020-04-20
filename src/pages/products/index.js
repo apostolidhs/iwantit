@@ -1,11 +1,10 @@
 import React, {useEffect} from 'react';
+import {useIntl} from 'providers/localization';
 import styled from 'styled-components';
 import {Box, Grid} from 'grommet';
 import {useScreenSize} from 'providers/theme';
 import {useCategorySelector, useCategoryDispatch} from 'providers/categories';
-import {useBucketParamsSelector, useBucketsDispatch} from 'providers/productBuckets';
 import * as categoryActions from 'providers/categories/actions';
-import * as bucketActions from 'providers/productBuckets/actions';
 import Range from 'components/range';
 import Pagination from 'components/pagination';
 import withResponsive from 'components/withResponsive';
@@ -21,6 +20,7 @@ import ActiveFilter from './activeFilter';
 import FilterButton from './filterButton';
 import NoResults from './noResults';
 import NotFound from './notFound';
+import useFetchBucket from './useFetchBucket';
 
 const loadingCards = [...Array(15)];
 
@@ -39,14 +39,14 @@ const categorySelector = ({loaded: categoryLoaded, exists, productsCount, priceM
   priceMax
 });
 
-const bucketSelector = ({ids, loaded: bucketLoaded, loading}) => ({ids, bucketLoaded, loading});
-
 const getPrice = (value, defaultValue) => (isNaN(value) ? defaultValue : value);
 
 const Products = ({id}) => {
+  const intl = useIntl();
+
   const [showFilters, filtersOn, filtersOff] = useToggle();
   const {isSmall, isMedium} = useScreenSize();
-  const categoryDispatch = useCategoryDispatch();
+  const dispatch = useCategoryDispatch();
   const {categoryLoaded, exists, productsCount, priceMin, priceMax} = useCategorySelector(id, categorySelector);
 
   const {priceRange, sort, order, page, onPrice, onSort, onPage} = useQueryparams(categoryLoaded, {
@@ -55,23 +55,18 @@ const Products = ({id}) => {
   });
 
   useEffect(() => {
-    if (!categoryLoaded) categoryDispatch(categoryActions.fetchCategory(id));
+    if (!categoryLoaded) dispatch(categoryActions.fetchCategory(id));
   }, []);
 
   const bucketParams = {categoryId: id, page, sort, order, priceMin: priceRange[0], priceMax: priceRange[1]};
-  const {ids, bucketLoaded, loading} = useBucketParamsSelector(bucketParams, bucketSelector);
-  const bucketsDispatch = useBucketsDispatch();
-
-  useEffect(() => {
-    if (!loading && !bucketLoaded) bucketsDispatch(bucketActions.fetchBucket(id, bucketParams));
-  }, [loading, bucketLoaded]);
+  const {ids, bucketLoaded, loading} = useFetchBucket(bucketParams);
 
   const priceProps = {
     values: [getPrice(priceRange[0], priceMin), getPrice(priceRange[1], priceMax)],
     min: priceMin,
     onChange: onPrice,
     max: priceMax,
-    label: 'Τιμή',
+    label: intl('filters.price.label'),
     id: 'priceFilter'
   };
 
