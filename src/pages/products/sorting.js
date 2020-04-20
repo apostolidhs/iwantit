@@ -1,4 +1,5 @@
 import React from 'react';
+import {useIntl} from 'providers/localization';
 import {useScreenSize} from 'providers/theme';
 import styled from 'styled-components';
 import {Box, Button} from 'grommet';
@@ -13,6 +14,7 @@ const AscButton = styled(Button)`
 `;
 
 const Sorting = ({direction, onSort, ...rest}) => {
+  const intl = useIntl();
   const {isSmall} = useScreenSize();
   const size = isSmall ? 'small' : 'medium';
 
@@ -21,15 +23,15 @@ const Sorting = ({direction, onSort, ...rest}) => {
       <DescButton
         primary={!direction}
         size={size}
-        label="Φθηνότερα"
-        title="Φθινότερα πρώτα"
+        label={intl('sorting.desc.label')}
+        title={intl('sorting.desc.title')}
         onClick={() => onSort('price', false)}
       />
       <AscButton
         primary={direction}
         size={size}
-        label="Ακριβότερα"
-        title="Ακριβότερα πρώτα"
+        label={intl('sorting.asc.label')}
+        title={intl('sorting.asc.title')}
         onClick={() => onSort('price', true)}
       />
     </Box>

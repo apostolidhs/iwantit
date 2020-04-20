@@ -1,4 +1,5 @@
 import React, {Fragment} from 'react';
+import {FormattedMessage} from 'react-intl';
 import Link from 'components/link';
 import CategoryLink from 'organisms/category/link';
 import {Text, Box} from 'grommet';
@@ -22,7 +23,7 @@ const Breadcrumb = ({categoryId, ...rest}) => (
   <Box direction="row" {...rest}>
     <Link to="/">
       <Text size="small" color="dark-3">
-        Αρχική
+        <FormattedMessage id="breadcrumb.landing" />
       </Text>
     </Link>
     {categoryId && (

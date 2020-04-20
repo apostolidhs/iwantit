@@ -1,5 +1,5 @@
 import React, {useContext, useMemo} from 'react';
-import {Grommet, ResponsiveContext} from 'grommet';
+import {Grommet, ResponsiveContext, ThemeContext} from 'grommet';
 import theme from './theme';
 import GlobalStyle from './globalStyle';
 
@@ -25,5 +25,7 @@ export const useScreenSize = () => {
     [size]
   );
 };
+
+export const useTheme = () => useContext(ThemeContext);
 
 export default Theme;

@@ -10,7 +10,7 @@ const Localization = ({children}) => (
 
 export const useIntl = () => {
   const {formatMessage} = useNativeIntl();
-  return id => formatMessage({id});
+  return (id, values) => formatMessage({id}, values);
 };
 
 export default Localization;
