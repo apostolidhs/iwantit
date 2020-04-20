@@ -1,7 +1,6 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useCallback} from 'react';
 import {useIntl} from 'providers/localization';
-import styled from 'styled-components';
-import {Box, Grid} from 'grommet';
+import {Box} from 'grommet';
 import {useScreenSize} from 'providers/theme';
 import {useCategorySelector, useCategoryDispatch} from 'providers/categories';
 import * as categoryActions from 'providers/categories/actions';
@@ -9,8 +8,7 @@ import Range from 'components/range';
 import Pagination from 'components/pagination';
 import withResponsive from 'components/withResponsive';
 import Breadcrumb from 'components/breadcrumb';
-import ProductTeaser from 'organisms/productTeaser';
-import Skeleton from 'organisms/productTeaser/skeleton';
+import Virtualized from 'components/virtualized';
 import useToggle from 'hooks/useToggle';
 import Sorting from './sorting';
 import useQueryparams from './useQueryParams';
@@ -20,16 +18,9 @@ import ActiveFilter from './activeFilter';
 import FilterButton from './filterButton';
 import NoResults from './noResults';
 import NotFound from './notFound';
-import useFetchBucket from './useFetchBucket';
-
-const loadingCards = [...Array(15)];
+import useVirtualized from './useVirtulized';
 
 const Container = withResponsive(Box);
-
-const CardContainer = styled(Grid)`
-  grid-auto-rows: ${({isSmall}) => (isSmall ? 280 : 430)}px;
-  width: 100%;
-`;
 
 const categorySelector = ({loaded: categoryLoaded, exists, productsCount, priceMin, priceMax}) => ({
   categoryLoaded,
@@ -45,7 +36,7 @@ const Products = ({id}) => {
   const intl = useIntl();
 
   const [showFilters, filtersOn, filtersOff] = useToggle();
-  const {isSmall, isMedium} = useScreenSize();
+  const {isSmall} = useScreenSize();
   const dispatch = useCategoryDispatch();
   const {categoryLoaded, exists, productsCount, priceMin, priceMax} = useCategorySelector(id, categorySelector);
 
@@ -58,9 +49,6 @@ const Products = ({id}) => {
     if (!categoryLoaded) dispatch(categoryActions.fetchCategory(id));
   }, []);
 
-  const bucketParams = {categoryId: id, page, sort, order, priceMin: priceRange[0], priceMax: priceRange[1]};
-  const {ids, bucketLoaded, loading} = useFetchBucket(bucketParams);
-
   const priceProps = {
     values: [getPrice(priceRange[0], priceMin), getPrice(priceRange[1], priceMax)],
     min: priceMin,
@@ -71,7 +59,17 @@ const Products = ({id}) => {
   };
 
   const hasFilter = priceProps.values[0] > priceMin || priceProps.values[1] < priceMax;
-  const hasResults = ids.length > 0;
+
+  const bucketParams = {categoryId: id, page, sort, order, priceMin: priceRange[0], priceMax: priceRange[1]};
+  const {total, bucketLoaded, hasResults, rowHeight, totalHeight, rowRenderer} = useVirtualized(bucketParams);
+
+  const onButtomPage = useCallback(
+    page => {
+      window.scrollTo(0, 0);
+      onPage(page);
+    },
+    [onPage]
+  );
 
   if (!categoryLoaded && !exists) {
     return (
@@ -82,7 +80,7 @@ const Products = ({id}) => {
   }
 
   return (
-    <Container gap="medium" pad="small">
+    <Container gap="medium" pad="small" flex="grow">
       <Breadcrumb />
 
       <Box direction="row" justify="between" margin={{bottom: 'small', top: 'medium'}}>
@@ -111,26 +109,15 @@ const Products = ({id}) => {
         </Box>
       )}
 
-      <Box direction="row">
-        <CardContainer
-          columns={{
-            count: isSmall ? 1 : isMedium ? 3 : 4,
-            size: 'auto'
-          }}
-          isSmall={isSmall}
-          gap="small">
-          {ids.map(productId => (
-            <ProductTeaser key={productId} id={productId} />
-          ))}
-          {loading && loadingCards.map((v, index) => <Skeleton key={index} isSmall={isSmall} />)}
-        </CardContainer>
+      <Box height={`${totalHeight}px`}>
+        <Virtualized rowHeight={rowHeight} total={total} rowRenderer={rowRenderer} />
       </Box>
 
-      {bucketLoaded && ids.length === 0 && <NoResults id={id} />}
+      {bucketLoaded && !hasResults && <NoResults id={id} />}
 
       {hasResults && (
         <Box direction="row" justify="center" margin={{top: 'small'}}>
-          <Pagination total={productsCount} page={page} onPage={onPage} />
+          <Pagination total={productsCount} page={page} onPage={onButtomPage} />
         </Box>
       )}
 

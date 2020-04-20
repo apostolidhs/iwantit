@@ -18,7 +18,7 @@ const Page = () => {
       <Header />
       <Box as="main" background="light-1" flex="grow">
         <Suspense fallback={null}>
-          <Router component={Box} align="center" pad="medium" basepath={basepath} data-testid="router">
+          <Router component={Box} align="center" flex="grow" pad="medium" basepath={basepath} data-testid="router">
             <Categories path="/" />
             <Products path="/category/:id/*" />
             <Product path="/product/:id/*" />
