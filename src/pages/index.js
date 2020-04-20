@@ -18,10 +18,10 @@ const Page = () => {
       <Header />
       <Box as="main" background="light-1" flex="grow">
         <Suspense fallback={null}>
-          <Router component={Box} align="center" pad="large" basepath={basepath} data-testid="router">
+          <Router component={Box} align="center" pad="medium" basepath={basepath} data-testid="router">
             <Categories path="/" />
-            <Products path="/category/:categoryId/*" />
-            <Product path="/product/:id" />
+            <Products path="/category/:id/*" />
+            <Product path="/product/:id/*" />
 
             <NotFound default />
           </Router>
