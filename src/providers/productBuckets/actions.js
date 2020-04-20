@@ -1,7 +1,7 @@
 import * as actions from 'providers/utilities/actions';
 import {getBucketId} from './helpers';
 
-export const fetchBucket = ({categoryId, page, sort, order, priceMax, priceMin}) => (
+export const fetchBucket = ({categoryId, page, sort, order, priceMax, priceMin}, limit = 15) => (
   state,
   dispatch,
   {api, notification, productsDispatch}
@@ -11,7 +11,7 @@ export const fetchBucket = ({categoryId, page, sort, order, priceMax, priceMin})
   dispatch(actions.startFetchResource(bucketId));
 
   return api
-    .getProductsByCategory(categoryId, {page, sort, order, priceMax, priceMin})
+    .getProductsByCategory(categoryId, {page, sort, order, priceMax, priceMin, limit})
     .then(({data}) => {
       productsDispatch(actions.doneFetch(data));
       const ids = data.map(({id}) => id.toString());

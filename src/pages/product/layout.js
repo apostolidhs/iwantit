@@ -5,16 +5,17 @@ import {useScreenSize} from 'providers/theme';
 const smallLayout = {
   rows: ['1fr'],
   columns: ['1fr'],
-  areas: [['details'], ['image'], ['info'], ['description']],
+  areas: [['details'], ['image'], ['info'], ['description'], ['related']],
   gap: 'medium'
 };
 
 const defaultLayout = {
-  rows: ['medium', 'flex'],
+  rows: ['medium', 'flex', 'medium'],
   columns: ['1fr', '1fr'],
   areas: [
     ['image', 'details'],
-    ['description', 'description']
+    ['description', 'description'],
+    ['related', 'related']
   ],
   gap: 'large',
   fill: true

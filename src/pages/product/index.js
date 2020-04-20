@@ -10,6 +10,8 @@ import Info from './info';
 import Layout from './layout';
 import Skeleton from './skeleton';
 import NotFound from './notFound';
+import Related from './related';
+import useRelated from './useRelated';
 
 const Container = withResponsive(Box);
 
@@ -28,11 +30,13 @@ const Product = ({id}) => {
   const dispatch = useProductsDispatch();
   const {loading, loaded, exists, imageUrl, title, description, categoryId} = useProductSelector(id, selector);
 
+  const relatedIds = useRelated(id, categoryId);
+
   useEffect(() => {
     if (loaded) return;
 
     dispatch(actions.fetchProduct(id));
-  }, []);
+  }, [id]);
 
   return (
     <Container maxSize="xlarge" gap="medium">
@@ -58,6 +62,7 @@ const Product = ({id}) => {
               <Box dangerouslySetInnerHTML={{__html: description}} width={{max: 'large'}}></Box>
             </Box>
           )}
+          {relatedIds.length > 0 && <Related ids={relatedIds} />}
         </Layout>
       )}
     </Container>

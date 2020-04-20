@@ -10,6 +10,8 @@ export default {
   'pages.products.notFound': 'Δεν βρέθηκε η κατηγορία',
   'pages.products.quantity': '{productsCount} προϊόντα',
 
+  'pages.product.related': 'Περισσότερα προϊόντα',
+
   'footer.madeWithLove': 'Made with love',
   'footer.whatIsThis': 'What is this',
 

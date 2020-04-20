@@ -13,7 +13,7 @@ const ImageContainer = styled(Link)`
 
 const selector = ({imageUrl, title, price, excerpt, slugPath}) => ({imageUrl, title, price, excerpt, slugPath});
 
-const ProductTeaser = ({id, ...rest}) => {
+const ProductTeaser = ({id, noExcerpt, ...rest}) => {
   const {imageUrl, title, price, excerpt, slugPath} = useProductSelector(id, selector);
   const to = `/product/${slugPath}`;
 
@@ -31,7 +31,7 @@ const ProductTeaser = ({id, ...rest}) => {
               {title}
             </Heading>
           </Link>
-          {excerpt && <Excerpt short>{excerpt}</Excerpt>}
+          {excerpt && !noExcerpt && <Excerpt short>{excerpt}</Excerpt>}
         </Box>
         <Link to={to}>
           <Price weight="bold">{price}</Price>
