@@ -1,0 +1,2 @@
+(this.webpackJsonpiwantit=this.webpackJsonpiwantit||[]).push([[10],{433:function(t,i,p){"use strict";p.r(i),i.default={id:6989,title:"\u03a4\u03b5\u03c7\u03bd\u03bf\u03bb\u03bf\u03b3\u03af\u03b1",slug:"technology",position:0,image_url:"https://abpcdn.pstatic.gr/P/bpimg128/6989_SX400Y400/1577836800/technology.webp",products_count:61,price_min:7900,price_max:121e3}}}]);
+//# sourceMappingURL=10.8bb1220d.chunk.js.map
