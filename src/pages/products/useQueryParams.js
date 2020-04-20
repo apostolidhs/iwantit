@@ -23,7 +23,7 @@ const useParams = () => {
     return {
       priceRange: priceMinRange > priceMaxRange ? [0, 0] : [priceMinRange, priceMaxRange],
       sort: !sort || sort === 'price' ? 'price' : null,
-      order: order === 'asc',
+      order: order !== 'desc',
       page: page ? getNumber(page, 0) : 1
     };
   }, [location.search]);
@@ -59,7 +59,7 @@ const useDispatches = (enabled, {setPriceRange, priceMin, priceMax}) => {
 
       onSort: (sort, order) => {
         if (sort !== 'price') return;
-        const add = value => (order ? value : null);
+        const add = value => (order ? null : value);
         updateParams(() => ({
           sort: add(escape(sort)),
           order: add(order ? 'asc' : 'desc')

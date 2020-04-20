@@ -15,34 +15,52 @@ const NumericContainer = styled(Box)`
   }
 `;
 
-const Range = ({id, values, min, max, onChange, label, ...rest}) => (
-  <Box gap="medium" width="medium" direction="row" {...rest}>
-    <Text as="label" htmlFor={id}>
-      {label}
-    </Text>
-    <Box flex="grow">
-      <Stack>
-        <Box border={{color: 'light-3'}} />
-        <RangeSelector id={id} values={values} onChange={onChange} min={min} max={max} round="xsmall" size="xxsmall" />
-      </Stack>
-      <NumericContainer justify="between" direction="row">
-        <TextInput
-          type="number"
-          value={values[0]}
-          onChange={({target: {value}}) => onChange([+value, values[1]])}
-          min={min}
-          max={max}
-        />
-        <TextInput
-          type="number"
-          value={values[1]}
-          onChange={({target: {value}}) => onChange([values[0], +value])}
-          min={min}
-          max={max}
-        />
-      </NumericContainer>
+const format = value => Math.round(value / 100);
+
+const Range = ({id, values: [minValue, maxValue], min, max, onChange, label, ...rest}) => {
+  const formateedMin = format(min);
+  const formateedMax = format(max);
+  const formattedValues = [format(minValue), format(maxValue)];
+
+  const change = ([nextMin, nextMax]) => onChange([nextMin * 100, nextMax * 100]);
+
+  return (
+    <Box gap="medium" width="medium" direction="row" {...rest}>
+      <Text as="label" htmlFor={id}>
+        {label}
+      </Text>
+      <Box flex="grow">
+        <Stack>
+          <Box border={{color: 'light-3'}} />
+          <RangeSelector
+            id={id}
+            values={formattedValues}
+            onChange={change}
+            min={formateedMin}
+            max={formateedMax}
+            round="xsmall"
+            size="xxsmall"
+          />
+        </Stack>
+        <NumericContainer justify="between" direction="row">
+          <TextInput
+            type="number"
+            value={formattedValues[0]}
+            onChange={({target: {value}}) => change([+value, formattedValues[1]])}
+            min={formateedMin}
+            max={formateedMax}
+          />
+          <TextInput
+            type="number"
+            value={formattedValues[1]}
+            onChange={({target: {value}}) => change([formattedValues[0], +value])}
+            min={formateedMin}
+            max={formateedMax}
+          />
+        </NumericContainer>
+      </Box>
     </Box>
-  </Box>
-);
+  );
+};
 
 export default memo(Range);

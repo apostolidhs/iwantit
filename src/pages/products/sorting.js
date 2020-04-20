@@ -21,18 +21,18 @@ const Sorting = ({direction, onSort, ...rest}) => {
   return (
     <Box direction="row" align="baseline" {...rest}>
       <DescButton
-        primary={!direction}
+        primary={direction}
         size={size}
         label={intl('sorting.desc.label')}
         title={intl('sorting.desc.title')}
-        onClick={() => onSort('price', false)}
+        onClick={() => onSort('price', true)}
       />
       <AscButton
-        primary={direction}
+        primary={!direction}
         size={size}
         label={intl('sorting.asc.label')}
         title={intl('sorting.asc.title')}
-        onClick={() => onSort('price', true)}
+        onClick={() => onSort('price', false)}
       />
     </Box>
   );

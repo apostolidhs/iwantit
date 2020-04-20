@@ -11,6 +11,7 @@ export default {
   'pages.products.quantity': '{productsCount} προϊόντα',
 
   'footer.madeWithLove': 'Made with love',
+  'footer.whatIsThis': 'What is this',
 
   'notFound.title': 'Δες όλες τις',
   'notFound.link': 'κατηγορίες προϊόντων',

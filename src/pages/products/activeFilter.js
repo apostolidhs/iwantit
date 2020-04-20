@@ -3,10 +3,15 @@ import {Button, Box} from 'grommet';
 import {FormClose} from 'grommet-icons';
 import {useIntl} from 'providers/localization';
 
+const format = value => Math.round(value / 100);
+
 const getLabel = ([minValue, maxValue], min, max) => {
-  if (minValue > min && maxValue < max) return ['activeFilter.price.both', {minValue, maxValue}];
-  if (minValue > min) return ['activeFilter.price.min', {minValue}];
-  return ['activeFilter.price.max', {maxValue}];
+  if (minValue > min && maxValue < max)
+    return ['activeFilter.price.both', {minValue: format(minValue), maxValue: format(maxValue)}];
+
+  if (minValue > min) return ['activeFilter.price.min', {minValue: format(minValue)}];
+
+  return ['activeFilter.price.max', {maxValue: format(maxValue)}];
 };
 
 const ActiveFilter = ({values, min, max, onChange, small, ...rest}) => {
