@@ -1,5 +1,6 @@
-import {useMemo} from 'react';
+import {useMemo, useState, useEffect, useCallback} from 'react';
 import queryString from 'query-string';
+import debounce from 'lodash/debounce';
 import {navigate} from '@reach/router';
 
 const getNumber = (value, defaultValue) => {
@@ -13,30 +14,47 @@ const updateParams = dispatch => {
   navigate(`${window.location.pathname}?${query}`, {replace: true});
 };
 
-const useParams = (enabled, {priceMin, priceMax}) =>
-  useMemo(() => {
+const useParams = () => {
+  const params = useMemo(() => {
     const {priceMin: priceMinValue, priceMax: priceMaxValue, sort, order, page} = queryString.parse(location.search);
     const priceMinRange = getNumber(priceMinValue, NaN);
     const priceMaxRange = getNumber(priceMaxValue, NaN);
-    const priceRange = priceMinRange > priceMaxRange ? [0, 0] : [priceMinRange, priceMaxRange];
 
     return {
-      priceRange,
+      priceRange: priceMinRange > priceMaxRange ? [0, 0] : [priceMinRange, priceMaxRange],
       sort: !sort || sort === 'price' ? 'price' : null,
       order: order === 'asc',
       page: page ? getNumber(page, 0) : 1
     };
   }, [location.search]);
 
-const useDispatches = (enabled, {priceMin, priceMax}) =>
-  useMemo(
+  return params;
+};
+
+const useDispatches = (enabled, {setPriceRange, priceMin, priceMax}) => {
+  const setDeferredPriceRange = useMemo(
+    () =>
+      debounce(
+        ([min, max], nextPriceMin, nextPriceMax) =>
+          updateParams(() => ({
+            priceMin: min === nextPriceMin ? null : escape(min),
+            priceMax: max === nextPriceMax ? null : escape(max)
+          })),
+        300
+      ),
+    []
+  );
+
+  useEffect(() => () => setDeferredPriceRange.flush(), []);
+
+  return useMemo(
     () => ({
-      onPrice: ([min, max]) => {
+      onPrice: value => {
+        const [min, max] = value;
         if (min > max) return;
-        updateParams(() => ({
-          priceMin: min === priceMin ? null : escape(min),
-          priceMax: max === priceMax ? null : escape(max)
-        }));
+
+        setPriceRange([min === priceMin ? NaN : min, max === priceMax ? NaN : max]);
+        setDeferredPriceRange(value, priceMin, priceMax);
       },
 
       onSort: (sort, order) => {
@@ -52,10 +70,13 @@ const useDispatches = (enabled, {priceMin, priceMax}) =>
     }),
     [enabled]
   );
+};
 
 export default (enabled, {priceMin = 0, priceMax = 0}) => {
-  const params = useParams(enabled, {priceMin, priceMax});
-  const dispatches = useDispatches(enabled, {priceMin, priceMax});
+  const params = useParams();
+  const [priceRange, setPriceRange] = useState(params.priceRange);
 
-  return {...params, ...dispatches};
+  const dispatches = useDispatches(enabled, {setPriceRange, priceMin, priceMax});
+
+  return {...params, priceRange, ...dispatches};
 };
