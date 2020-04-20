@@ -22,7 +22,7 @@ const initialState = getInitialState();
 
 const Products = ({children}) => {
   const extraArgument = useExtraArgument();
-  const [state, dispatch] = useReducer(reducer, initialState, {extraArgument});
+  const [state, dispatch] = useReducer(reducer, initialState, extraArgument);
 
   return (
     <DispatchContext.Provider value={dispatch}>

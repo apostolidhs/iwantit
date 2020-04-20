@@ -11,11 +11,11 @@ const ImageContainer = styled(Link)`
   height: 100%;
 `;
 
-const selector = ({imageUrl, title, price, excerpt}) => ({imageUrl, title, price, excerpt});
+const selector = ({imageUrl, title, price, excerpt, slugPath}) => ({imageUrl, title, price, excerpt, slugPath});
 
 const ProductTeaser = ({id, ...rest}) => {
-  const {imageUrl, title, price, excerpt} = useProductSelector(id, selector);
-  const to = `product/${id}/slug`;
+  const {imageUrl, title, price, excerpt, slugPath} = useProductSelector(id, selector);
+  const to = `/product/${slugPath}`;
 
   return (
     <Box background="white" pad="medium" gap="small" round="2px" title={title} {...rest}>
@@ -31,7 +31,7 @@ const ProductTeaser = ({id, ...rest}) => {
               {title}
             </Heading>
           </Link>
-          {excerpt && <Excerpt>{excerpt}</Excerpt>}
+          {excerpt && <Excerpt short>{excerpt}</Excerpt>}
         </Box>
         <Link to={to}>
           <Price weight="bold">{price}</Price>

@@ -4,7 +4,7 @@ export const startFetchResource = id => ({type: actionTypes.startFetchResource, 
 
 export const doneFetchResource = (id, payload) => ({type: actionTypes.doneFetchResource, id, payload});
 
-export const failFetchResource = id => ({type: actionTypes.failFetchResource, id});
+export const failFetchResource = (id, error) => ({type: actionTypes.failFetchResource, id, error});
 
 export const startFetch = () => ({type: actionTypes.startFetch});
 

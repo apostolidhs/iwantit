@@ -6,7 +6,7 @@ import Context from './context';
 const configuration = {
   basepath: process.env.PUBLIC_URL,
   apiUrl: 'http://bp-interview.herokuapp.com',
-  mockApi: true
+  mockApi: false
 };
 
 const Configuration = ({children}) => <Context.Provider value={configuration}>{children}</Context.Provider>;
