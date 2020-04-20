@@ -51,7 +51,7 @@ const Product = ({id}) => {
             </Box>
           </Box>
           <Box gridArea="details" gap="small" justify="center" width={isSmall ? null : {max: 'medium'}}>
-            <Heading level="3" margin="none">
+            <Heading level="2" margin="none">
               {title}
             </Heading>
             {!isSmall && <Info id={id} />}
