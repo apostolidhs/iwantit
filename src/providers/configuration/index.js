@@ -5,7 +5,7 @@ import Context from './context';
 
 const configuration = {
   basepath: process.env.PUBLIC_URL,
-  apiUrl: 'http://bp-interview.herokuapp.com',
+  apiUrl: 'https://bp-interview.herokuapp.com',
   mockApi: process.env.NODE_ENV !== 'production'
 };
 
